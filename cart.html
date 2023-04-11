@@ -1,25 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add to Cart Example</title>
+  </head>
+  <body>
     <!-- The product to be added to cart -->
     <div class="product">
-    <h2>Product 1</h2>
-    <p>$10.00</p>
-    <button class="add-to-cart">Add to Cart</button>
-  </div>
-  
-  <!-- The cart -->
-  <div class="cart">
-    <h2>Cart</h2>
-    <ul></ul>
-    <p>Total: $0.00</p>
-  </div>
-  
-</body>
+      <h2>Product 1</h2>
+      <p>$10.00</p>
+      <button class="add-to-cart">Add to Cart</button>
+    </div>
+
+    <!-- The cart -->
+    <div class="cart">
+      <h2>Cart</h2>
+      <ul></ul>
+      <p>Total: $0.00</p>
+    </div>
+
+    <script>
+      // 1. Select the "Add to Cart" button
+      const addToCartButton = document.querySelector(".add-to-cart");
+
+      // 2. Select the cart
+      const cart = document.querySelector(".cart ul");
+
+      // 3. Initialize the cart total
+      let cartTotal = 0;
+
+      // 4. Add a click event listener to the "Add to Cart" button
+      addToCartButton.addEventListener("click", () => {
+        // 5. Get the product information
+        const productTitle = document.querySelector(".product h2").textContent;
+        const productPrice = document.querySelector(".product p").textContent;
+
+        // 6. Create a new cart item
+        const cartItem = document.createElement("li");
+        const cartItemTitle = document.createElement("span");
+        const cartItemPrice = document.createElement("span");
+        cartItemTitle.textContent = productTitle;
+        cartItemPrice.textContent = productPrice;
+        cartItem.appendChild(cartItemTitle);
+        cartItem.appendChild(cartItemPrice);
+        cart.appendChild(cartItem);
+
+        // 7. Add the cart item to the cart
+        const price = parseFloat(productPrice.replace("$", ""));
+        cartTotal += price;
+
+        // 8. Update the cart total
+        const cartTotalElement = document.querySelector(".cart p");
+        cartTotalElement.textContent = `Total: $${cartTotal.toFixed(2)}`;
+      });
+    </script>
+  </body>
 </html>
